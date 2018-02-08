@@ -17,7 +17,8 @@ using namespace std;
 const GLuint WIDTH = 800, HEIGHT = 800;
 const GLfloat CAMERA_MOVEMENT_STEP = 0.08;
 
-GLfloat rot;
+GLfloat roty;
+GLfloat rotx;
 glm::vec3 camera_position;
 glm::vec3 scale;
 
@@ -47,10 +48,18 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         camera_position.y += CAMERA_MOVEMENT_STEP;
 
     if (key == GLFW_KEY_R && action == GLFW_PRESS)
-        rot += 10.0f;
+        roty += 10.0f;
 
     if (key == GLFW_KEY_T && action == GLFW_PRESS)
-        rot -= 10.0f;
+        roty -= 10.0f;
+
+    if (key == GLFW_KEY_F && action == GLFW_PRESS)
+        rotx += 10.0f;
+
+    if (key == GLFW_KEY_G && action == GLFW_PRESS)
+        rotx -= 10.0f;
+
+
 
     if (key == GLFW_KEY_Z && action == GLFW_PRESS)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -226,47 +235,27 @@ int main()
     } */
 
     // Inner part of grid
-    for(float i = -0.75; i < +0.75; i+=0.015) {
+    for(float i = -50; i < 50; i+=1) {
 
-        vert.push_back( glm::vec3(i,-0.5,+0.75) );
-        vert.push_back( glm::vec3(i,-0.5,-0.75) );
+        vert.push_back( glm::vec3(i,-0.5,50) );
+        vert.push_back( glm::vec3(i,-0.5,-50) );
 
-        vert.push_back( glm::vec3(-0.75,-0.5,i) );
-        vert.push_back( glm::vec3(+0.75,-0.5,i) );
+        vert.push_back( glm::vec3(-50,-0.5,i) );
+        vert.push_back( glm::vec3(+50,-0.5,i) );
     }
 
     // Outer boundary of grid
-    vert.push_back( glm::vec3(-0.75,-0.5,+0.75) );
-    vert.push_back( glm::vec3(+0.75,-0.5,+0.75) );
+    vert.push_back( glm::vec3(-50,-0.5,+50) );
+    vert.push_back( glm::vec3(+50,-0.5,+50) );
 
-    vert.push_back( glm::vec3(-0.75,-0.5,-0.75) );
-    vert.push_back( glm::vec3(+0.75,-0.5,-0.75) );
+    vert.push_back( glm::vec3(-50,-0.5,-50) );
+    vert.push_back( glm::vec3(+50,-0.5,-50) );
 
-    vert.push_back( glm::vec3(-0.75,-0.5,-0.75) );
-    vert.push_back( glm::vec3(-0.75,-0.5,+0.75) );
+    vert.push_back( glm::vec3(-50,-0.5,-50) );
+    vert.push_back( glm::vec3(-50,-0.5,+50) );
 
-    vert.push_back( glm::vec3(+0.75,-0.5,-0.75) );
-    vert.push_back( glm::vec3(+0.75,-0.5,+0.75) );
-
-    /*vert.push_back( glm::vec3(-0.75,0,0.75) );
-    vert.push_back( glm::vec3(-0.75,0,-0.75) );
-
-    vert.push_back( glm::vec3(0,0,0.75) );
-    vert.push_back( glm::vec3(0.0,0,-0.75) );
-
-    vert.push_back( glm::vec3(+0.75,0,0.75) );
-    vert.push_back( glm::vec3(+0.75,0,-0.75) );
-
-    vert.push_back( glm::vec3(-0.75,0,-0.75) );
-    vert.push_back( glm::vec3(+0.75,0,-0.75) );
-
-    vert.push_back( glm::vec3(-0.75,0,0) );
-    vert.push_back( glm::vec3(+0.75,0,0) );
-
-    vert.push_back( glm::vec3(-0.75,0,+0.75) );
-    vert.push_back( glm::vec3(+0.75,0,+0.75) );*/
-
-
+    vert.push_back( glm::vec3(+50,-0.5,-50) );
+    vert.push_back( glm::vec3(+50,-0.5,+50) );
 
 
     vector<glm::vec3> vertCube =
@@ -428,7 +417,8 @@ int main()
 
         glm::mat4 model_matrix;
         model_matrix = glm::scale(model_matrix, glm::vec3(1.0f));
-        model_matrix = glm::rotate(model_matrix, glm::radians(rot), glm::vec3(0.0f, 1.0f, 0.0f));
+        model_matrix = glm::rotate(model_matrix, glm::radians(roty), glm::vec3(0.0f, 1.0f, 0.0f));
+        model_matrix = glm::rotate(model_matrix, glm::radians(rotx), glm::vec3(1.0f, 0.0f, 0.0f));
         //model_matrix = glm::rotate(model_matrix, (float)glfwGetTime() * glm::radians(30.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
         glm::mat4 projection_matrix = glm::perspective(glm::radians(45.0f), (GLfloat)width / (GLfloat)height, 0.1f, 100.0f);
