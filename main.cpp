@@ -225,7 +225,30 @@ int main()
         }
     } */
 
-    vert.push_back( glm::vec3(-0.75,0,0.75) );
+    // Inner part of grid
+    for(float i = -0.75; i < +0.75; i+=0.015) {
+
+        vert.push_back( glm::vec3(i,-0.5,+0.75) );
+        vert.push_back( glm::vec3(i,-0.5,-0.75) );
+
+        vert.push_back( glm::vec3(-0.75,-0.5,i) );
+        vert.push_back( glm::vec3(+0.75,-0.5,i) );
+    }
+
+    // Outer boundary of grid
+    vert.push_back( glm::vec3(-0.75,-0.5,+0.75) );
+    vert.push_back( glm::vec3(+0.75,-0.5,+0.75) );
+
+    vert.push_back( glm::vec3(-0.75,-0.5,-0.75) );
+    vert.push_back( glm::vec3(+0.75,-0.5,-0.75) );
+
+    vert.push_back( glm::vec3(-0.75,-0.5,-0.75) );
+    vert.push_back( glm::vec3(-0.75,-0.5,+0.75) );
+
+    vert.push_back( glm::vec3(+0.75,-0.5,-0.75) );
+    vert.push_back( glm::vec3(+0.75,-0.5,+0.75) );
+
+    /*vert.push_back( glm::vec3(-0.75,0,0.75) );
     vert.push_back( glm::vec3(-0.75,0,-0.75) );
 
     vert.push_back( glm::vec3(0,0,0.75) );
@@ -241,7 +264,7 @@ int main()
     vert.push_back( glm::vec3(+0.75,0,0) );
 
     vert.push_back( glm::vec3(-0.75,0,+0.75) );
-    vert.push_back( glm::vec3(+0.75,0,+0.75) );
+    vert.push_back( glm::vec3(+0.75,0,+0.75) );*/
 
 
 
@@ -423,7 +446,7 @@ int main()
 
         glBindVertexArray(gridVAO);
 
-        glDrawArrays(GL_LINES, 0, 12);
+        glDrawArrays(GL_LINES, 0, 2*2*100+2*4);
 
 
         glBindVertexArray(0);
