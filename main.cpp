@@ -200,20 +200,22 @@ int main()
 
     vector <glm::uvec3> ind;
 
-    for (int i = 0; i <= 100; i++){
-        for (int j = 0; j <= 100; j++){
+    /*for (int i = 0; i <= 100; ++i){
+        for (int j = 0; j <= 100; ++j){
 
             xloc = float(j)/float(100);
 
             zloc = float(i)/float(100);
+
+            yloc = float(0);
 
             vert.push_back(glm::vec3(xloc,yloc,zloc));
 
         }
     }
 
-    for (int k = 0; k <= 100; k++){
-        for (int l = 0; l <= 100; l++){
+    for (int k = 0; k <= 100; ++k){
+        for (int l = 0; l <= 100; ++l){
 
             int ind1 = k * (100 + 1);
             int ind2 = (l+1) * (100 + 1);
@@ -221,7 +223,25 @@ int main()
             ind.push_back(glm::uvec3(ind1+l, ind1+l+1, ind2+l+1));
             ind.push_back(glm::uvec3(ind1+l, ind2+l+1, ind2+l));
         }
-    }
+    } */
+
+    vert.push_back( glm::vec3(-0.75,0,0.75) );
+    vert.push_back( glm::vec3(-0.75,0,-0.75) );
+
+    vert.push_back( glm::vec3(0,0,0.75) );
+    vert.push_back( glm::vec3(0.0,0,-0.75) );
+
+    vert.push_back( glm::vec3(+0.75,0,0.75) );
+    vert.push_back( glm::vec3(+0.75,0,-0.75) );
+
+    vert.push_back( glm::vec3(-0.75,0,-0.75) );
+    vert.push_back( glm::vec3(+0.75,0,-0.75) );
+
+    vert.push_back( glm::vec3(-0.75,0,0) );
+    vert.push_back( glm::vec3(+0.75,0,0) );
+
+    vert.push_back( glm::vec3(-0.75,0,+0.75) );
+    vert.push_back( glm::vec3(+0.75,0,+0.75) );
 
 
 
@@ -312,24 +332,42 @@ int main()
     //glUniformMatrix4fv(pm_addr, 1, false, glm::value_ptr(pm));
 
 
-    GLuint VAO, VBO, IBO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &IBO);
-    //glGenBuffers(1, &EBO);
+
+    GLuint cubeVAO;
+    GLuint gridVAO;
+    GLuint cubeVBO;
+    GLuint gridVBO;
+    GLuint IBO;
+
+
+    //Cube
+    glGenVertexArrays(1, &cubeVAO);
+    glGenBuffers(1, &cubeVBO);
+
     // Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-
-    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-
+    glBindVertexArray(cubeVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
 
     glBufferData(GL_ARRAY_BUFFER, vertCube.size() * sizeof(glm::vec3), &vertCube.front(), GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
     glEnableVertexAttribArray(0);
 
     //glBufferData(GL_ELEMENT_ARRAY_BUFFER, ind.size() * sizeof(glm::uvec3), &ind.front(), GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
+    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs), remember: do NOT unbind the EBO, keep it bound to this VAO
+
+    //Grid
+    glGenVertexArrays(1, &gridVAO);
+    glGenBuffers(1, &gridVBO);
+
+    glBindVertexArray(gridVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, gridVBO);
+
+    glBufferData(GL_ARRAY_BUFFER, vert.size() * sizeof(glm::vec3), &vert.front(), GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
+    glEnableVertexAttribArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -379,12 +417,18 @@ int main()
 
         //glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void*)0);
 
-        glBindVertexArray(VAO);
+        glBindVertexArray(cubeVAO);
 
         glDrawArrays(GL_TRIANGLES, 0, 12*3);
 
+        glBindVertexArray(gridVAO);
+
+        glDrawArrays(GL_LINES, 0, 12);
+
 
         glBindVertexArray(0);
+
+
 
 
         // Swap the screen buffers
