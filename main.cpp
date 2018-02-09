@@ -22,7 +22,6 @@ glm::vec3 camera_position;
 glm::vec3 scale;
 
 
-
 // Is called whenever a key is pressed/released via GLFW
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
@@ -232,98 +231,98 @@ int main()
     {
         // Front face triangle 1
         glm::vec3(0.5,-0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05), //Brown
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,-0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
 
         // Front face triangle 2
         glm::vec3(0.5,-0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(0.5,0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
 
         // Back face triangle 1
         glm::vec3(0.5,-0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,-0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
 
         // Back face triangle 2
         glm::vec3(0.5,-0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(0.5,0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
 
         // Left face triangle 1
         glm::vec3(-0.5,-0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,-0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
 
         // Left face triangle 2
         glm::vec3(-0.5,-0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
 
         // Right face triangle 1
         glm::vec3(0.5,-0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(0.5,0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(0.5,-0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
 
         // Right face triangle 2
         glm::vec3(0.5,-0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(0.5,0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(0.5,0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
 
         // Top face triangle 1
         glm::vec3(0.5,0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
 
         // Top face triangle 2
         glm::vec3(0.5,0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(0.5,0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
 
         // Bottom face triangle 1
         glm::vec3(0.5,0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,-0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,-0.5,0.5),
 
         // Bottom face triangle 2
         glm::vec3(0.5,0.5,0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(0.5,-0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05),
+        glm::vec3(0.05, 0.74, 0.5), // Teal
         glm::vec3(-0.5,-0.5,-0.5),
-        glm::vec3(0.5, 0.35, 0.05)
+        glm::vec3(0.05, 0.74, 0.5) // Teal
     };
 
     //Coordinate Axes
@@ -496,7 +495,7 @@ int main()
         // Render
         // Clear the colorbuffer
 
-        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+        glClearColor(0.3f, 0.2f, 0.1f, 1.0f); // Light brown
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LESS);
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
