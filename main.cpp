@@ -1,4 +1,3 @@
-#define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -12,81 +11,83 @@
 
 using namespace std;
 
-// Window dimensions
-const GLuint WIDTH = 800, HEIGHT = 800;
+const GLuint WINDOW_WIDTH = 800, WINDOW_HEIGHT = 800;
 const GLfloat CAMERA_MOVEMENT_STEP = 0.08;
 
-GLfloat roty;
-GLfloat rotx;
+GLfloat yRotation;
+GLfloat xRotation;
 glm::vec3 camera_position;
 glm::vec3 scale;
 
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) {
 
-// Is called whenever a key is pressed/released via GLFW
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
-{
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+
         glfwSetWindowShouldClose(window, GL_TRUE);
+    }
+    else if (key == GLFW_KEY_Q && action == GLFW_PRESS) {
 
-    if (key == GLFW_KEY_Q && action == GLFW_PRESS)
         camera_position.z += CAMERA_MOVEMENT_STEP;
+    }
+    else if (key == GLFW_KEY_E && action == GLFW_PRESS) {
 
-    if (key == GLFW_KEY_E && action == GLFW_PRESS)
         camera_position.z -= CAMERA_MOVEMENT_STEP;
+    }
+    else if (key == GLFW_KEY_D && action == GLFW_PRESS) {
 
-    if (key == GLFW_KEY_D && action == GLFW_PRESS)
         camera_position.x -= CAMERA_MOVEMENT_STEP;
+    }
+    else if(key == GLFW_KEY_A && action == GLFW_PRESS) {
 
-    if (key == GLFW_KEY_A && action == GLFW_PRESS)
         camera_position.x += CAMERA_MOVEMENT_STEP;
+    }
+    else if(key == GLFW_KEY_W && action == GLFW_PRESS) {
 
-    if (key == GLFW_KEY_W && action == GLFW_PRESS)
         camera_position.y -= CAMERA_MOVEMENT_STEP;
+    }
+    else if (key == GLFW_KEY_S && action == GLFW_PRESS) {
 
-    if (key == GLFW_KEY_S && action == GLFW_PRESS)
         camera_position.y += CAMERA_MOVEMENT_STEP;
+    }
+    else if (key == GLFW_KEY_R && action == GLFW_PRESS) {
 
-    if (key == GLFW_KEY_R && action == GLFW_PRESS)
-        roty += 10.0f;
+        yRotation += 10.0f;
+    }
+    else if (key == GLFW_KEY_T && action == GLFW_PRESS) {
 
-    if (key == GLFW_KEY_T && action == GLFW_PRESS)
-        roty -= 10.0f;
+        yRotation -= 10.0f;
+    }
+    else if (key == GLFW_KEY_F && action == GLFW_PRESS) {
 
-    if (key == GLFW_KEY_F && action == GLFW_PRESS)
-        rotx += 10.0f;
+        xRotation += 10.0f;
+    }
+    else if (key == GLFW_KEY_G && action == GLFW_PRESS) {
 
-    if (key == GLFW_KEY_G && action == GLFW_PRESS)
-        rotx -= 10.0f;
+        xRotation -= 10.0f;
+    }
+    else if (key == GLFW_KEY_Z && action == GLFW_PRESS) {
 
-
-
-    if (key == GLFW_KEY_Z && action == GLFW_PRESS)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    }
+    else if (key == GLFW_KEY_X && action == GLFW_PRESS) {
 
-    if (key == GLFW_KEY_X && action == GLFW_PRESS)
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-
+    }
 }
 
-// The MAIN function, from here we start the application and run the game loop
 int main()
 {
-    std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
     // Init GLFW
     glfwInit();
     // Set all the required options for GLFW
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint( GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE );
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-
-
-
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "OpenGL Horse", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Horse Program", nullptr, nullptr);
     if (window == nullptr)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -99,11 +100,13 @@ int main()
     glfwGetFramebufferSize( window, &screenWidth, &screenHeight );
 
     glfwMakeContextCurrent(window);
+
     // Set the required callback functions
     glfwSetKeyCallback(window, key_callback);
 
     // Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
     glewExperimental = GL_TRUE;
+
     // Initialize GLEW to setup the OpenGL Function pointers
     if (glewInit() != GLEW_OK)
     {
@@ -127,9 +130,13 @@ int main()
     std::ifstream VertexShaderStream(vertex_shader_path, ios::in);
 
     if (VertexShaderStream.is_open()) {
+
         string Line = "";
-        while (getline(VertexShaderStream, Line))
-        VertexShaderCode += "\n" + Line;
+
+        while (getline(VertexShaderStream, Line)) {
+            VertexShaderCode += "\n" + Line;
+        }
+
         VertexShaderStream.close();
     }
     else {
@@ -509,8 +516,8 @@ int main()
 
         glm::mat4 model_matrix;
         model_matrix = glm::scale(model_matrix, glm::vec3(1.0f));
-        model_matrix = glm::rotate(model_matrix, glm::radians(roty), glm::vec3(0.0f, 1.0f, 0.0f));
-        model_matrix = glm::rotate(model_matrix, glm::radians(rotx), glm::vec3(1.0f, 0.0f, 0.0f));
+        model_matrix = glm::rotate(model_matrix, glm::radians(yRotation), glm::vec3(0.0f, 1.0f, 0.0f));
+        model_matrix = glm::rotate(model_matrix, glm::radians(xRotation), glm::vec3(1.0f, 0.0f, 0.0f));
         //model_matrix = glm::rotate(model_matrix, (float)glfwGetTime() * glm::radians(30.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
         glm::mat4 projection_matrix = glm::perspective(glm::radians(45.0f), (GLfloat)width / (GLfloat)height, 0.1f, 200.0f);
