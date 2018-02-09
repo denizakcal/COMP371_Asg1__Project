@@ -14,8 +14,8 @@ using namespace std;
 const GLuint WINDOW_WIDTH = 800, WINDOW_HEIGHT = 800;
 const GLfloat CAMERA_MOVEMENT_STEP = 0.08;
 
-GLfloat yRotation;
-GLfloat xRotation;
+GLfloat y_rotation;
+GLfloat x_rotation;
 glm::vec3 camera_position;
 glm::vec3 scale;
 
@@ -51,19 +51,19 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
     else if (key == GLFW_KEY_R && action == GLFW_PRESS) {
 
-        yRotation += 10.0f;
+        y_rotation += 10.0f;
     }
     else if (key == GLFW_KEY_T && action == GLFW_PRESS) {
 
-        yRotation -= 10.0f;
+        y_rotation -= 10.0f;
     }
     else if (key == GLFW_KEY_F && action == GLFW_PRESS) {
 
-        xRotation += 10.0f;
+        x_rotation += 10.0f;
     }
     else if (key == GLFW_KEY_G && action == GLFW_PRESS) {
 
-        xRotation -= 10.0f;
+        x_rotation -= 10.0f;
     }
     else if (key == GLFW_KEY_Z && action == GLFW_PRESS) {
 
@@ -122,10 +122,11 @@ int main()
 
 
     // Build and compile our shader program
+
     // Vertex shader
 
     // Read the Vertex Shader code from the file
-    string vertex_shader_path = "vertex.shader";
+    string vertex_shader_path = "vertex_shader.glsl";
     string VertexShaderCode;
     std::ifstream VertexShaderStream(vertex_shader_path, ios::in);
 
@@ -146,7 +147,7 @@ int main()
     }
 
     // Read the Fragment Shader code from the file
-    string fragment_shader_path = "fragment.shader";
+    string fragment_shader_path = "fragment_shader.glsl";
     std::string FragmentShaderCode;
     std::ifstream FragmentShaderStream(fragment_shader_path, std::ios::in);
 
@@ -213,7 +214,7 @@ int main()
     // Inner part of grid
     for(float i = -50; i < 50; i+=1) {
 
-        gridVert.push_back( glm::vec3(i,-0.5,50) );
+        gridVert.push_back( glm::vec3(i,-0.5,+50) );
         gridVert.push_back( glm::vec3(i,-0.5,-50) );
 
         gridVert.push_back( glm::vec3(-50,-0.5,i) );
@@ -516,8 +517,8 @@ int main()
 
         glm::mat4 model_matrix;
         model_matrix = glm::scale(model_matrix, glm::vec3(1.0f));
-        model_matrix = glm::rotate(model_matrix, glm::radians(yRotation), glm::vec3(0.0f, 1.0f, 0.0f));
-        model_matrix = glm::rotate(model_matrix, glm::radians(xRotation), glm::vec3(1.0f, 0.0f, 0.0f));
+        model_matrix = glm::rotate(model_matrix, glm::radians(y_rotation), glm::vec3(0.0f, 1.0f, 0.0f));
+        model_matrix = glm::rotate(model_matrix, glm::radians(x_rotation), glm::vec3(1.0f, 0.0f, 0.0f));
         //model_matrix = glm::rotate(model_matrix, (float)glfwGetTime() * glm::radians(30.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
         glm::mat4 projection_matrix = glm::perspective(glm::radians(45.0f), (GLfloat)width / (GLfloat)height, 0.1f, 200.0f);
