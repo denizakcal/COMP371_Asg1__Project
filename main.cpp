@@ -401,7 +401,6 @@ int main()
     GLuint axeVAO;
     GLuint axeVBO;
     GLuint colorVBO;
-    GLuint IBO;
 
 
     //Cube
@@ -541,7 +540,7 @@ int main()
         //Lower Parts
 
         //Front Left Lower Leg
-        translat = glm::translate(model_matrix, glm::vec3(2,0,2));
+        translat = glm::translate(model_matrix, glm::vec3(2.5,0,2.5));
 
         scal = glm::scale(model_matrix, glm::vec3(0.25, 1, 0.25));
 
