@@ -199,68 +199,37 @@ int main()
 
     //----------------------------------------------------------------------------------------------------------
 
-    GLfloat xloc;
 
-    GLfloat yloc;
+    vector <glm::vec3> gridVert;
 
-    GLfloat zloc;
 
-    vector <glm::vec3> vert;
-
-    vector <glm::uvec3> ind;
-
-    /*for (int i = 0; i <= 100; ++i){
-        for (int j = 0; j <= 100; ++j){
-
-            xloc = float(j)/float(100);
-
-            zloc = float(i)/float(100);
-
-            yloc = float(0);
-
-            vert.push_back(glm::vec3(xloc,yloc,zloc));
-
-        }
-    }
-
-    for (int k = 0; k <= 100; ++k){
-        for (int l = 0; l <= 100; ++l){
-
-            int ind1 = k * (100 + 1);
-            int ind2 = (l+1) * (100 + 1);
-
-            ind.push_back(glm::uvec3(ind1+l, ind1+l+1, ind2+l+1));
-            ind.push_back(glm::uvec3(ind1+l, ind2+l+1, ind2+l));
-        }
-    } */
-
+    //Grid
     // Inner part of grid
     for(float i = -50; i < 50; i+=1) {
 
-        vert.push_back( glm::vec3(i,-0.5,50) );
-        vert.push_back( glm::vec3(i,-0.5,-50) );
+        gridVert.push_back( glm::vec3(i,-0.5,50) );
+        gridVert.push_back( glm::vec3(i,-0.5,-50) );
 
-        vert.push_back( glm::vec3(-50,-0.5,i) );
-        vert.push_back( glm::vec3(+50,-0.5,i) );
+        gridVert.push_back( glm::vec3(-50,-0.5,i) );
+        gridVert.push_back( glm::vec3(+50,-0.5,i) );
     }
 
     // Outer boundary of grid
-    vert.push_back( glm::vec3(-50,-0.5,+50) );
-    vert.push_back( glm::vec3(+50,-0.5,+50) );
+    gridVert.push_back( glm::vec3(-50,-0.5,+50) );
+    gridVert.push_back( glm::vec3(+50,-0.5,+50) );
 
-    vert.push_back( glm::vec3(-50,-0.5,-50) );
-    vert.push_back( glm::vec3(+50,-0.5,-50) );
+    gridVert.push_back( glm::vec3(-50,-0.5,-50) );
+    gridVert.push_back( glm::vec3(+50,-0.5,-50) );
 
-    vert.push_back( glm::vec3(-50,-0.5,-50) );
-    vert.push_back( glm::vec3(-50,-0.5,+50) );
+    gridVert.push_back( glm::vec3(-50,-0.5,-50) );
+    gridVert.push_back( glm::vec3(-50,-0.5,+50) );
 
-    vert.push_back( glm::vec3(+50,-0.5,-50) );
-    vert.push_back( glm::vec3(+50,-0.5,+50) );
+    gridVert.push_back( glm::vec3(+50,-0.5,-50) );
+    gridVert.push_back( glm::vec3(+50,-0.5,+50) );
 
-
+    //Cube
     vector<glm::vec3> vertCube =
     {
-        // Cube
         // Front face triangle 1
         glm::vec3(0.5,-0.5,0.5),
         glm::vec3(-0.5,0.5,0.5),
@@ -322,6 +291,51 @@ int main()
         glm::vec3(-0.5,-0.5,-0.5),
     };
 
+    //Coordinate Axes
+
+    vector <glm::vec3> axeVert;
+    //x-axis
+    axeVert.push_back(glm::vec3(0,-0.5,0));
+    axeVert.push_back(glm::vec4(1.0,0.0,0.0,1.0));
+    axeVert.push_back(glm::vec3(2.5,-0.5,0));
+    axeVert.push_back(glm::vec4(1.0, 0.0, 0.0,1.0));
+    //y-axis
+    axeVert.push_back(glm::vec3(0,-0.5,0));
+    axeVert.push_back(glm::vec4(0.0, 1.0, 0.0, 1.0));
+    axeVert.push_back(glm::vec3(0,2.0,0));
+    axeVert.push_back(glm::vec4(0.0, 1.0, 0.0, 1.0));
+    //z-axis
+    axeVert.push_back(glm::vec3(0,-0.5,0));
+    axeVert.push_back(glm::vec4(0.0, 0.0, 1.0, 1.0));
+    axeVert.push_back(glm::vec3(0, -0.5, 2.5));
+    axeVert.push_back(glm::vec4(0.0, 0.0, 1.0, 1.0));
+
+
+
+    //HORSE
+
+
+    //Head
+
+    //Neck
+
+    //Torso
+
+    //Right Front Lower Arm
+
+    //Right Front Upper Arm
+
+    //Left Front Lower Arm
+
+    //Left Front Upper Arm
+
+    //Right Back Lower Leg
+
+    //Right Back Upper Leg
+
+    //Left Back Lower Leg
+
+    //Left Back Upper Leg
 
 
     //------ MODEL MATRIX ---------
@@ -349,6 +363,9 @@ int main()
     GLuint gridVAO;
     GLuint cubeVBO;
     GLuint gridVBO;
+    GLuint axeVAO;
+    GLuint axeVBO;
+    GLuint colorVBO;
     GLuint IBO;
 
 
@@ -360,9 +377,9 @@ int main()
     glBindVertexArray(cubeVAO);
     glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
 
+    glEnableVertexAttribArray(0);
     glBufferData(GL_ARRAY_BUFFER, vertCube.size() * sizeof(glm::vec3), &vertCube.front(), GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
-    glEnableVertexAttribArray(0);
 
     //glBufferData(GL_ELEMENT_ARRAY_BUFFER, ind.size() * sizeof(glm::uvec3), &ind.front(), GL_STATIC_DRAW);
 
@@ -377,19 +394,49 @@ int main()
     glBindVertexArray(gridVAO);
     glBindBuffer(GL_ARRAY_BUFFER, gridVBO);
 
-    glBufferData(GL_ARRAY_BUFFER, vert.size() * sizeof(glm::vec3), &vert.front(), GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
     glEnableVertexAttribArray(0);
+    glBufferData(GL_ARRAY_BUFFER, gridVert.size() * sizeof(glm::vec3), &gridVert.front(), GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
+
 
     glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs), remember: do NOT unbind the EBO, keep it bound to this VAO
+
+    //Axes
+    glGenVertexArrays(1, &axeVAO);
+    glGenBuffers(1, &axeVBO);
+
+    glBindVertexArray(axeVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, axeVBO);
+
+
+    glBufferData(GL_ARRAY_BUFFER, axeVert.size() * sizeof(glm::vec3), &axeVert.front(), GL_STATIC_DRAW);
+    //glBufferData(GL_ARRAY_BUFFER, sizeof(axeColor) * sizeof(GLfloat), &axeColor[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(axeVert), (GLvoid*)0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(axeVert), (void*)12);
+
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
+    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs), remember: do NOT unbind the EBO, keep it bound to this VAO
+
+    //Color
+    /*glGenBuffers(1, &colorVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, colorVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(axeColor), &axeColor[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(1);
+    glBindBuffer(GL_ARRAY_BUFFER, colorVBO);
+    glVertexAttribPointer(1,3, GL_FLOAT, GL_FALSE, 0, (void*)0); */
 
     scale = glm::vec3(1.0f);
 
     GLuint projectionLoc = glGetUniformLocation(shaderProgram, "projection_matrix");
     GLuint viewMatrixLoc = glGetUniformLocation(shaderProgram, "view_matrix");
     GLuint transformLoc = glGetUniformLocation(shaderProgram, "model_matrix");
+    GLint colorLoc = glGetUniformLocation(shaderProgram, "color");
 
 
     // Game loop
@@ -403,7 +450,7 @@ int main()
         // Render
         // Clear the colorbuffer
 
-        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LESS);
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -421,7 +468,7 @@ int main()
         model_matrix = glm::rotate(model_matrix, glm::radians(rotx), glm::vec3(1.0f, 0.0f, 0.0f));
         //model_matrix = glm::rotate(model_matrix, (float)glfwGetTime() * glm::radians(30.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
-        glm::mat4 projection_matrix = glm::perspective(glm::radians(45.0f), (GLfloat)width / (GLfloat)height, 0.1f, 100.0f);
+        glm::mat4 projection_matrix = glm::perspective(glm::radians(45.0f), (GLfloat)width / (GLfloat)height, 0.1f, 200.0f);
 
         glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(model_matrix));
         glUniformMatrix4fv(viewMatrixLoc, 1, GL_FALSE, glm::value_ptr(view_matrix));
@@ -438,10 +485,12 @@ int main()
 
         glDrawArrays(GL_LINES, 0, 2*2*100+2*4);
 
+        glBindVertexArray(axeVAO);
+
+        glDrawArrays(GL_LINE_STRIP, 0, 6);
+
 
         glBindVertexArray(0);
-
-
 
 
         // Swap the screen buffers
