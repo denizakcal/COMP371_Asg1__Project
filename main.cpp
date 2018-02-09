@@ -9,7 +9,6 @@
 #include <string>
 #include <fstream>
 #include <vector>
-//#include "Objloader.hpp"
 
 using namespace std;
 
@@ -21,6 +20,7 @@ GLfloat roty;
 GLfloat rotx;
 glm::vec3 camera_position;
 glm::vec3 scale;
+
 
 
 // Is called whenever a key is pressed/released via GLFW
@@ -417,7 +417,7 @@ int main()
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertCube), (GLvoid*)0);
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vertCube), (void*)(3*sizeof(GLfloat)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vertCube), (GLvoid*)(3*sizeof(GLfloat)));
 
 
     //glBufferData(GL_ELEMENT_ARRAY_BUFFER, ind.size() * sizeof(glm::uvec3), &ind.front(), GL_STATIC_DRAW);
@@ -478,6 +478,14 @@ int main()
     GLint colorLoc = glGetUniformLocation(shaderProgram, "color");
 
 
+    double xpos, ypos;
+    glfwGetCursorPos(window, &xpos, &ypos);
+
+    glm::mat4 scale;
+    glm::mat4 translat;
+    glm::mat4 rotate;
+
+
     // Game loop
 
 
@@ -489,7 +497,7 @@ int main()
         // Render
         // Clear the colorbuffer
 
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LESS);
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -528,6 +536,12 @@ int main()
 
         glDrawArrays(GL_LINE_STRIP, 0, 6);
 
+        model_matrix = glm::translate(model_matrix, glm::vec3(2,0,2));
+        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(model_matrix));
+
+        glBindVertexArray(cubeVAO);
+
+        glDrawArrays(GL_TRIANGLES, 0, 12*3);
 
         glBindVertexArray(0);
 
