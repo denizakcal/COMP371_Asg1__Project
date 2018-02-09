@@ -417,7 +417,7 @@ int main()
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertCube), (GLvoid*)0);
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(vertCube), (void*)12);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vertCube), (void*)(3*sizeof(GLfloat)));
 
 
     //glBufferData(GL_ELEMENT_ARRAY_BUFFER, ind.size() * sizeof(glm::uvec3), &ind.front(), GL_STATIC_DRAW);
