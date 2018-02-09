@@ -10,6 +10,6 @@ uniform mat4 projection_matrix;
 
 void main()
 {
-gl_Position = projection_matrix * view_matrix * model_matrix * vec4(position.x, position.y, position.z, 1.0);
-fragmentColor = vertexColor;
+    gl_Position = projection_matrix * view_matrix * model_matrix * vec4(position.x, position.y, position.z, 1.0);
+    fragmentColor = vertexColor;
 }

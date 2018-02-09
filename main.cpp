@@ -232,63 +232,98 @@ int main()
     {
         // Front face triangle 1
         glm::vec3(0.5,-0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05), //Brown
         glm::vec3(-0.5,0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,-0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
 
         // Front face triangle 2
         glm::vec3(0.5,-0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(0.5,0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
 
         // Back face triangle 1
         glm::vec3(0.5,-0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,-0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
 
         // Back face triangle 2
         glm::vec3(0.5,-0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(0.5,0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
 
         // Left face triangle 1
         glm::vec3(-0.5,-0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,-0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
 
         // Left face triangle 2
         glm::vec3(-0.5,-0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
 
         // Right face triangle 1
         glm::vec3(0.5,-0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(0.5,0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(0.5,-0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
 
         // Right face triangle 2
         glm::vec3(0.5,-0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(0.5,0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(0.5,0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
 
         // Top face triangle 1
         glm::vec3(0.5,0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
 
         // Top face triangle 2
         glm::vec3(0.5,0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(0.5,0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
 
         // Bottom face triangle 1
         glm::vec3(0.5,0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,-0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,-0.5,0.5),
 
         // Bottom face triangle 2
         glm::vec3(0.5,0.5,0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(0.5,-0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05),
         glm::vec3(-0.5,-0.5,-0.5),
+        glm::vec3(0.5, 0.35, 0.05)
     };
 
     //Coordinate Axes
@@ -296,19 +331,19 @@ int main()
     vector <glm::vec3> axeVert;
     //x-axis
     axeVert.push_back(glm::vec3(0,-0.5,0));
-    axeVert.push_back(glm::vec4(1.0,0.0,0.0,1.0));
-    axeVert.push_back(glm::vec3(2.5,-0.5,0));
-    axeVert.push_back(glm::vec4(1.0, 0.0, 0.0,1.0));
+    axeVert.push_back(glm::vec3(1.0,0.0,0.0)); //Red
+    axeVert.push_back(glm::vec3(5,-0.5,0));
+    axeVert.push_back(glm::vec3(1.0, 0.0, 0.0)); //Red
     //y-axis
     axeVert.push_back(glm::vec3(0,-0.5,0));
-    axeVert.push_back(glm::vec4(0.0, 1.0, 0.0, 1.0));
-    axeVert.push_back(glm::vec3(0,2.0,0));
-    axeVert.push_back(glm::vec4(0.0, 1.0, 0.0, 1.0));
+    axeVert.push_back(glm::vec3(0.0, 1.0, 0.0)); //Green
+    axeVert.push_back(glm::vec3(0,4.5,0));
+    axeVert.push_back(glm::vec3(0.0, 1.0, 0.0)); //Green
     //z-axis
     axeVert.push_back(glm::vec3(0,-0.5,0));
-    axeVert.push_back(glm::vec4(0.0, 0.0, 1.0, 1.0));
-    axeVert.push_back(glm::vec3(0, -0.5, 2.5));
-    axeVert.push_back(glm::vec4(0.0, 0.0, 1.0, 1.0));
+    axeVert.push_back(glm::vec3(0.0, 0.0, 1.0)); //Blue
+    axeVert.push_back(glm::vec3(0, -0.5, 5));
+    axeVert.push_back(glm::vec3(0.0, 0.0, 1.0)); //Blue
 
 
 
@@ -377,9 +412,13 @@ int main()
     glBindVertexArray(cubeVAO);
     glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
 
-    glEnableVertexAttribArray(0);
+
     glBufferData(GL_ARRAY_BUFFER, vertCube.size() * sizeof(glm::vec3), &vertCube.front(), GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertCube), (GLvoid*)0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(vertCube), (void*)12);
+
 
     //glBufferData(GL_ELEMENT_ARRAY_BUFFER, ind.size() * sizeof(glm::uvec3), &ind.front(), GL_STATIC_DRAW);
 
